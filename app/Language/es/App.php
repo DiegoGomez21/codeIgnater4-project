@@ -28,4 +28,5 @@ return [
     'update' => 'Actualizar',
     'selectDepartment' => 'Seleccione un departamento',
     'noEmployees' => 'No hay empleados registrados.',
+    'employeesByDepartment' => 'Empleados por departamento',
 ];

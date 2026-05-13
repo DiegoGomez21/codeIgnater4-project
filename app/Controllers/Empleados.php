@@ -24,7 +24,7 @@ class Empleados extends BaseController
 
             if ($binario !== false) {
                 try {
-                    $empleado['telefono'] = (string) $encrypter->decrypt($binario);
+                    $empleado['telefono'] = (string) service('encrypter')->decrypt($binario);
                 } catch (\Throwable) {
                     $empleado['telefono'] = $valor;
                 }
@@ -35,11 +35,15 @@ class Empleados extends BaseController
 
         unset($empleado);
 
+        $conteos = $model->getConteoPorDepartamento();
+
         $data = [
-            'titulo'      => lang('App.employees'),
-            'empleados'   => $empleados,
-            'rutaBase'    => $this->rutaBase($locale),
-            'localeActual'=> $this->localeActual($locale),
+            'titulo'          => lang('App.employees'),
+            'empleados'       => $empleados,
+            'rutaBase'        => $this->rutaBase($locale),
+            'localeActual'    => $this->localeActual($locale),
+            'chartLabelsJson' => json_encode(array_column($conteos, 'departamento')),
+            'chartDataJson'   => json_encode(array_map('intval', array_column($conteos, 'total'))),
         ];
 
         return $this->smartyView('empleados/index', $data);

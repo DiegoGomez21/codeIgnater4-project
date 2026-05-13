@@ -28,4 +28,5 @@ return [
     'update' => 'Update',
     'selectDepartment' => 'Select a department',
     'noEmployees' => 'There are no registered employees.',
+    'employeesByDepartment' => 'Employees by department',
 ];

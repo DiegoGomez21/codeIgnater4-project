@@ -47,6 +47,17 @@ class OpsMigrate extends BaseController
                 } else {
                     $result['seed'] = 'Seeder omitido: tabla departamentos no existe.';
                 }
+
+                if ($db->tableExists('empleados')) {
+                    $count = $db->table('empleados')->countAllResults();
+
+                    if ($count === 0) {
+                        Database::seeder()->call('EmpleadosSeeder');
+                        $result['seed_empleados'] = 'EmpleadosSeeder ejecutado.';
+                    } else {
+                        $result['seed_empleados'] = 'Seeder omitido: empleados ya tiene datos.';
+                    }
+                }
             }
 
             return $this->response->setJSON($result);

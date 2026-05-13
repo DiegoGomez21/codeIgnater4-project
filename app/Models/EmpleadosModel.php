@@ -23,4 +23,15 @@ class EmpleadosModel extends Model
             ->orderBy('empleados.id', 'ASC')
             ->findAll();
     }
+
+    public function getConteoPorDepartamento()
+    {
+        return $this->db->table('empleados')
+            ->select('departamentos.nombre as departamento, COUNT(empleados.id) as total')
+            ->join('departamentos', 'departamentos.id = empleados.id_departamento')
+            ->groupBy('empleados.id_departamento')
+            ->orderBy('total', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
 }
