@@ -63,6 +63,9 @@ Vagrantfile
 /writable/debugbar/*
 !/writable/debugbar/index.html
 
+/writable/smarty/compiled/*
+/writable/smarty/cache/*
+
 php_errors.log
 
 #-------------------------

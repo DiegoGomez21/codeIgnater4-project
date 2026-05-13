@@ -12,7 +12,8 @@
     "require": {
         "php": "^8.2",
         "codeigniter4/framework": "^4.7",
-        "codeigniter4/shield": "*"
+        "codeigniter4/shield": "*",
+        "smarty/smarty": "^5.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

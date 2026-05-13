@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Libraries\SmartyRenderer;
 use App\Models\DepartamentosModel;
 use App\Models\EmpleadosModel;
 
@@ -41,7 +42,7 @@ class Empleados extends BaseController
             'localeActual'=> $this->localeActual($locale),
         ];
 
-        return view('empleados/index', $data);
+        return $this->smartyView('empleados/index', $data);
     }
 
     public function new(?string $locale = null)
@@ -57,7 +58,7 @@ class Empleados extends BaseController
             'localeActual'  => $this->localeActual($locale),
         ];
 
-        return view('empleados/nuevo', $data);
+        return $this->smartyView('empleados/nuevo', $data);
     }
 
     public function create(?string $locale = null)
@@ -116,7 +117,7 @@ class Empleados extends BaseController
             'localeActual'  => $this->localeActual($locale),
         ];
 
-        return view('empleados/editar', $data);
+        return $this->smartyView('empleados/editar', $data);
     }
 
     public function update($id = null, ?string $locale = null)
@@ -184,4 +185,10 @@ class Empleados extends BaseController
     {
         return $this->localeActual($locale) === 'en' ? 'en/employees' : 'es/empleados';
     }
+
+    private function smartyView(string $template, array $data): string
+    {
+        return (new SmartyRenderer())->assignAll($data)->render($template);
+    }
 }
+
