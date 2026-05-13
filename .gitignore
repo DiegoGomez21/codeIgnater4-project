@@ -140,3 +140,6 @@ coverage/
 # Local editor history
 .history/
 .fleet/
+
+app.zip
+vendor.zip
