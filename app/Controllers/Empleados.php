@@ -25,10 +25,12 @@ class Empleados extends BaseController
             if ($binario !== false) {
                 try {
                     $empleado['telefono'] = (string) service('encrypter')->decrypt($binario);
-                } catch (\Throwable) {
+                } catch (\Throwable $e) {
+                    log_message('error', 'Decrypt error: ' . $e->getMessage() . ' | Valor: ' . $valor);
                     $empleado['telefono'] = $valor;
                 }
             } else {
+                log_message('error', 'Base64 decode failed for: ' . $valor);
                 $empleado['telefono'] = $valor;
             }
         }

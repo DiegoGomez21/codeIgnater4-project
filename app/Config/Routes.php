@@ -2,7 +2,7 @@
 
 $routes ??= service('routes');
 
-$routes->match(['get', 'post'], 'ops/migrate', 'OpsMigrate::run');
+$routes->match(['GET', 'POST'], 'ops/migrate', 'OpsMigrate::run');
 
 $routes->group('', ['filter' => 'session'], static function ($routes) {
     $routes->get('/', 'Empleados::index');
