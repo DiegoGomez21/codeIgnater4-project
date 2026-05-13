@@ -78,6 +78,7 @@ class SmartyRenderer
         $this->smarty->assign('_mensaje', $session->getFlashdata('mensaje'));
         $this->smarty->assign('_error', $session->getFlashdata('error'));
         $this->smarty->assign('_errors', $session->getFlashdata('errors'));
+        $this->smarty->assign('_usuarioAutenticado', auth()->loggedIn());
     }
 }
 

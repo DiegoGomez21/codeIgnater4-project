@@ -22,23 +22,33 @@
 
             <div class="collapse navbar-collapse" id="menuPrincipal">
                 <ul class="navbar-nav ms-auto align-items-center gap-1">
+                    {if $_usuarioAutenticado}
                     <li class="nav-item">
                         <a class="nav-link" href="{base_url uri=$rutaBase}">{lang key='App.employees'}</a>
                     </li>
+                    {/if}
                     <li class="nav-item">
                         <a class="nav-link px-2" href="{base_url uri='es/empleados'}">ES</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-2" href="{base_url uri='en/employees'}">EN</a>
                     </li>
-                    <li class="nav-item ms-2">
-                        <form action="{base_url uri='logout'}" method="post" class="d-inline">
-                            {csrf_field}
-                            <button type="submit" class="btn btn-outline-light btn-sm">
-                                {lang key='Auth.logout'}
-                            </button>
-                        </form>
-                    </li>
+                    {if $_usuarioAutenticado}
+                        <li class="nav-item ms-2">
+                            <form action="{if $localeActual|default:'es' eq 'en'}{base_url uri='en/logout'}{else}{base_url uri='es/logout'}{/if}" method="post" class="d-inline">
+                                {csrf_field}
+                                <button type="submit" class="btn btn-outline-light btn-sm">
+                                    {lang key='Auth.logout'}
+                                </button>
+                            </form>
+                        </li>
+                    {else}
+                        <li class="nav-item ms-2">
+                            <a class="btn btn-outline-light btn-sm" href="{if $localeActual|default:'es' eq 'en'}{base_url uri='en/register'}{else}{base_url uri='es/register'}{/if}">
+                                {lang key='Auth.register'}
+                            </a>
+                        </li>
+                    {/if}
                 </ul>
             </div>
         </div>
